@@ -23,9 +23,9 @@ logging.basicConfig(
 # =====================================================================
 # SYSTEM & RISK CONFIGURATION
 # =====================================================================
-KALSHI_KEY_ID = "6f26446f-ff72-4026-9ce7-a9f78fe0a058"
+KALSHI_KEY_ID = "your key"
 KALSHI_KEY_PATH = "private_key.pem"
-ODDS_API_KEY = "ffd0c19dddd4ca4535ee3b44ecbb1a2d"
+ODDS_API_KEY = "yoyr odd key"
 
 MAX_RISK_PER_TRADE = 0.02          # Hard cap: 2% risk per trade
 MAX_TOTAL_EXPOSURE = 0.20          # Hard cap: 20% max portfolio exposure
