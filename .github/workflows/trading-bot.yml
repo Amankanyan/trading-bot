@@ -1,0 +1,62 @@
+name: Kalshi Trading Bot
+
+# Runs the bot continuously inside one job for up to ~6h (GitHub's hard cap
+# for hosted runners), then the schedule below starts a fresh run so the
+# bot is back up within minutes. concurrency + cancel-in-progress:false
+# means a new scheduled run queues behind a still-running one instead of
+# starting a second bot in parallel.
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+  workflow_dispatch: {}
+
+concurrency:
+  group: kalshi-trading-bot
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  run-bot:
+    runs-on: ubuntu-latest
+    timeout-minutes: 355
+    defaults:
+      run:
+        working-directory: "my kalshi bot"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Write Kalshi private key
+        run: |
+          cat > private_key.pem <<'EOF'
+          ${{ secrets.KALSHI_PRIVATE_KEY }}
+          EOF
+
+      - name: Run trading engine
+        env:
+          KALSHI_KEY_ID: ${{ secrets.KALSHI_KEY_ID }}
+          ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
+        run: python main.py
+
+      # Runs even if the job above was cancelled by the timeout, so the
+      # next scheduled run resumes from the latest known position state.
+      - name: Persist position state
+        if: always()
+        run: |
+          rm -f private_key.pem
+          git config user.name "kalshi-trading-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add active_positions.json 2>/dev/null || true
+          if ! git diff --cached --quiet; then
+            git commit -m "Update position state [skip ci]"
+            git pull --rebase origin "${GITHUB_REF_NAME}"
+            git push origin "HEAD:${GITHUB_REF_NAME}"
+          fi

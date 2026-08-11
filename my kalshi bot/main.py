@@ -15,17 +15,20 @@ from kalshi_python.models import CreateOrderRequest
 # LOGGING SETUP
 # =====================================================================
 logging.basicConfig(
-    filename='kalshi_execution.log',
     level=logging.INFO,
-    format='%(asctime)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(message)s'
+    format='%(asctime)s - %(levelname)s - [%(filename)s:%(lineno)d] - %(message)s',
+    handlers=[
+        logging.FileHandler('kalshi_execution.log'),
+        logging.StreamHandler(),
+    ]
 )
 
 # =====================================================================
 # SYSTEM & RISK CONFIGURATION
 # =====================================================================
-KALSHI_KEY_ID = "your key"
-KALSHI_KEY_PATH = "private_key.pem"
-ODDS_API_KEY = "yoyr odd key"
+KALSHI_KEY_ID = os.environ["KALSHI_KEY_ID"]
+KALSHI_KEY_PATH = os.environ.get("KALSHI_KEY_PATH", "private_key.pem")
+ODDS_API_KEY = os.environ["ODDS_API_KEY"]
 
 MAX_RISK_PER_TRADE = 0.02          # Hard cap: 2% risk per trade
 MAX_TOTAL_EXPOSURE = 0.20          # Hard cap: 20% max portfolio exposure
@@ -648,9 +651,12 @@ def run_trading_engine() -> None:
 
 if __name__ == "__main__":
     logging.info("Execution Engine Process Started.")
+    run_once = os.environ.get("RUN_ONCE") == "1"
     while True:
         try:
             run_trading_engine()
         except Exception as crash:
             logging.critical(f"FATAL EXCEPTION IN LOOP: {crash}", exc_info=True)
+        if run_once:
+            break
         time.sleep(1200)
