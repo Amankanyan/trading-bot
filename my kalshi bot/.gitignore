@@ -1,4 +1,7 @@
 private_key.pem
+private_key_prod.pem
 __pycache__/
 *.pyc
 kalshi_execution.log
+launchd_stdout.log
+launchd_stderr.log
