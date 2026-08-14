@@ -43,13 +43,17 @@ _DEMO_KEY_PATH = os.path.join(BASE_DIR, "private_key.pem")
 _PROD_KEY_ID = "7fa83fcd-4cfb-445f-a33f-d37e79d54b90"
 _PROD_KEY_PATH = os.path.join(BASE_DIR, "private_key_prod.pem")
 
+# .strip() everywhere here: a trailing newline from copy-pasting a secret
+# into GitHub's UI (or a shell) is invisible but breaks the KEY_ID the
+# moment it's used as an HTTP header value ("Invalid ... return character(s)
+# in header value"), and silently mismatches the pinned key path otherwise.
 KALSHI_KEY_ID = os.environ.get(
     "KALSHI_KEY_ID", _PROD_KEY_ID if KALSHI_ENV == "prod" else _DEMO_KEY_ID
-)
+).strip()
 KALSHI_KEY_PATH = os.environ.get(
     "KALSHI_KEY_PATH", _PROD_KEY_PATH if KALSHI_ENV == "prod" else _DEMO_KEY_PATH
-)
-ODDS_API_KEY = os.environ.get("ODDS_API_KEY", "d71d5fe01a2b95e83abf43c1137ac323")
+).strip()
+ODDS_API_KEY = os.environ.get("ODDS_API_KEY", "d71d5fe01a2b95e83abf43c1137ac323").strip()
 
 MAX_RISK_PER_TRADE = 0.02          # Hard cap: 2% risk per trade
 MAX_TOTAL_EXPOSURE = 0.20          # Hard cap: 20% max portfolio exposure
