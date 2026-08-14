@@ -57,7 +57,12 @@ ODDS_API_KEY = os.environ.get("ODDS_API_KEY", "d71d5fe01a2b95e83abf43c1137ac323"
 
 MAX_RISK_PER_TRADE = 0.02          # Hard cap: 2% risk per trade
 MAX_TOTAL_EXPOSURE = 0.20          # Hard cap: 20% max portfolio exposure
-MIN_EV_THRESHOLD = 0.04            # Minimum +4.0% Expected Value required
+MIN_EV_THRESHOLD = 0.005           # Minimum +0.5% EV. Lowered from 4% purely to
+                                    # accumulate paper-trade data faster in DRY_RUN —
+                                    # a 4% edge basically never appears (see EV history
+                                    # in the log), so at 4% the paper ledger would stay
+                                    # empty for weeks. This threshold is noisier and
+                                    # should NOT be used with DRY_RUN off.
 HARD_STOP_LOSS_PROB = 0.32         # Absolute floor: liquidate if win prob < 32%
 STOP_LOSS_EDGE_DROP = 0.15         # Relative floor: liquidate if prob falls 15pp below entry prob
 MAX_SLIPPAGE_PCT = 0.30            # Slippage floor: reject bids below 70% of fair value
