@@ -45,10 +45,11 @@ jobs:
           KALSHI_KEY_ID: ${{ secrets.KALSHI_KEY_ID }}
           KALSHI_KEY_PATH: private_key.pem
           ODDS_API_KEY: ${{ secrets.ODDS_API_KEY }}
-          # Defaults to the demo exchange (no real money) unless this repo
-          # variable is explicitly set to "prod". Repo Settings > Secrets
-          # and variables > Actions > Variables > KALSHI_ENV.
+          # Both default to the SAFE state (demo exchange, orders disabled)
+          # unless a repo variable explicitly overrides them. Repo Settings >
+          # Secrets and variables > Actions > Variables.
           KALSHI_ENV: ${{ vars.KALSHI_ENV || 'demo' }}
+          DRY_RUN: ${{ vars.DRY_RUN || '1' }}
         run: python main.py
 
       # Runs even if the job above was cancelled by the timeout, so the
