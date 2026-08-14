@@ -71,6 +71,12 @@ MAX_MARKET_PAGES = 20              # Pagination safety cap
 POSITIONS_FILE = os.path.join(BASE_DIR, f"active_positions_{KALSHI_ENV}.json")
 FALLBACK_BANKROLL = 500.0          # Used only if live balance fetch fails
 MAX_ORDER_AGE_SECONDS = 900        # Cancel a resting entry order after 15 minutes
+# DRY_RUN never places an order, so it never learns whether an entry it
+# would have taken was actually right. This is a separate paper-trading
+# ledger: every "[DRY RUN] Would buy" gets recorded here, then followed
+# up once its market settles, so a real win-rate/P&L can accumulate
+# without ever risking money.
+PAPER_LEDGER_FILE = os.path.join(BASE_DIR, f"paper_trades_{KALSHI_ENV}.json")
 
 API_PATH_PREFIX = "/trade-api/v2"
 API_BASE = (
@@ -213,6 +219,101 @@ def save_positions(positions: Dict[str, Any]) -> None:
         logging.error(f"Failed atomic disk save: {e}")
 
 active_positions = load_positions()
+
+# =====================================================================
+# PAPER TRADING LEDGER (DRY_RUN outcome tracking)
+# =====================================================================
+
+def load_paper_ledger() -> Dict[str, Any]:
+    if os.path.exists(PAPER_LEDGER_FILE):
+        try:
+            with open(PAPER_LEDGER_FILE, "r") as f:
+                return json.load(f)
+        except Exception as e:
+            logging.critical(f"State corruption detected in {PAPER_LEDGER_FILE}: {e}")
+    return {"open": {}, "closed": [], "wins": 0, "losses": 0, "total_pnl": 0.0}
+
+def save_paper_ledger(ledger: Dict[str, Any]) -> None:
+    try:
+        with open(PAPER_LEDGER_FILE + ".tmp", "w") as f:
+            json.dump(ledger, f, indent=4)
+        os.replace(PAPER_LEDGER_FILE + ".tmp", PAPER_LEDGER_FILE)
+    except Exception as e:
+        logging.error(f"Failed atomic disk save: {e}")
+
+paper_ledger = load_paper_ledger()
+
+def record_paper_entry(
+    ticker: str, team: str, opponent: str, sport_key: str,
+    price_cents: int, net_cost: float, true_prob: float, contracts: int,
+) -> None:
+    """Log a DRY_RUN entry that would have been taken, for later settlement."""
+    paper_ledger["open"][ticker] = {
+        "team": team,
+        "opponent": opponent,
+        "league": sport_key,
+        "price_cents": price_cents,
+        "net_cost": net_cost,
+        "true_prob": true_prob,
+        "contracts": contracts,
+        "opened_ts": time.time(),
+    }
+    save_paper_ledger(paper_ledger)
+
+def resolve_paper_trades() -> None:
+    """
+    Check every open paper trade's market for settlement. A market that has
+    settled always buys YES in this bot's model, so result=="yes" is a win
+    and result=="no" is a total loss of the paper stake — never a partial.
+    """
+    if not paper_ledger["open"]:
+        return
+
+    for ticker in list(paper_ledger["open"].keys()):
+        entry = paper_ledger["open"][ticker]
+        try:
+            market = kalshi_get(f"/markets/{ticker}").get("market", {})
+        except Exception as e:
+            logging.warning(f"Paper trade settlement check failed for {ticker}: {e}")
+            continue
+
+        status = market.get("status")
+        result = market.get("result")
+        if status not in ("finalized", "settled") or result not in ("yes", "no"):
+            continue
+
+        contracts = entry["contracts"]
+        net_cost = entry["net_cost"]
+        won = result == "yes"
+        pnl = contracts * (1.0 - net_cost) if won else -contracts * net_cost
+
+        entry["result"] = result
+        entry["won"] = won
+        entry["pnl"] = pnl
+        entry["closed_ts"] = time.time()
+        paper_ledger["closed"].append(entry)
+        paper_ledger["wins"] += int(won)
+        paper_ledger["losses"] += int(not won)
+        paper_ledger["total_pnl"] += pnl
+        del paper_ledger["open"][ticker]
+
+        logging.info(
+            f"PAPER SETTLED: {entry['team']} vs {entry['opponent']} ({ticker}) — "
+            f"{'WIN' if won else 'LOSS'} | P&L: ${pnl:+.2f}"
+        )
+
+    save_paper_ledger(paper_ledger)
+
+    total_closed = paper_ledger["wins"] + paper_ledger["losses"]
+    if total_closed:
+        win_rate = 100.0 * paper_ledger["wins"] / total_closed
+        logging.info(
+            f"PAPER LEDGER: {len(paper_ledger['open'])} open, {total_closed} settled | "
+            f"{paper_ledger['wins']}W-{paper_ledger['losses']}L ({win_rate:.1f}%) | "
+            f"Total hypothetical P&L: ${paper_ledger['total_pnl']:+.2f}"
+        )
+    elif paper_ledger["open"]:
+        logging.info(f"PAPER LEDGER: {len(paper_ledger['open'])} open, none settled yet")
 
 # =====================================================================
 # ACCOUNT & DYNAMIC EXPOSURE CALCULATIONS
@@ -706,6 +807,7 @@ def run_trading_engine() -> None:
     for ticker in list(active_positions.keys()):
         resolve_pending_order(ticker)
     reconcile_with_exchange()
+    resolve_paper_trades()
 
     sharp_probabilities: Dict[str, float] = {}
 
@@ -824,6 +926,11 @@ def run_trading_engine() -> None:
                     )
                     if DRY_RUN:
                         logging.info(f"[DRY RUN] Would buy {contracts} {ticker} @ {best_ask}c")
+                        if ticker not in paper_ledger["open"]:
+                            record_paper_entry(
+                                ticker, search_name, opponent, sport_key,
+                                best_ask, net_cost, true_prob, contracts,
+                            )
                         continue
 
                     client_id = new_client_order_id()
