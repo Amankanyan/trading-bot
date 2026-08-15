@@ -776,7 +776,16 @@ def fetch_league_odds(sport_key: str) -> Tuple[Optional[List[Dict[str, Any]]], O
 def run_trading_engine() -> None:
     global active_positions
 
-    bankroll = get_live_bankroll()
+    if DRY_RUN:
+        # Paper trades are hypothetical, so they shouldn't be sized off
+        # whatever the real account happens to hold right now (e.g. $0.99
+        # after an unrelated manual trade) — that would just make every
+        # Kelly size round down to 0 and the paper ledger would never
+        # collect a single entry. Size against a fixed notional bankroll
+        # instead, as if the account were actually funded.
+        bankroll = FALLBACK_BANKROLL
+    else:
+        bankroll = get_live_bankroll()
     committed_this_cycle = 0.0
 
     # 1. Fetch Sharp Odds for every configured league, stopping early if quota runs low.
