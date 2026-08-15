@@ -29,6 +29,46 @@
             "true_prob": 0.1260722712168739,
             "contracts": 11,
             "opened_ts": 1786752644.0082378
+        },
+        "KXEPLGAME-26AUG23MCIBOU-BOU": {
+            "team": "Bournemouth",
+            "opponent": "Manchester City",
+            "league": "soccer_epl",
+            "price_cents": 14,
+            "net_cost": 0.148428,
+            "true_prob": 0.15874478348057017,
+            "contracts": 10,
+            "opened_ts": 1786778337.1789205
+        },
+        "KXLALIGAGAME-26AUG22ESPRMA-ESP": {
+            "team": "Espanyol",
+            "opponent": "Real Madrid",
+            "league": "soccer_spain_la_liga",
+            "price_cents": 15,
+            "net_cost": 0.15892499999999998,
+            "true_prob": 0.16638959311749307,
+            "contracts": 6,
+            "opened_ts": 1786778339.4628713
+        },
+        "KXBUNDESLIGAGAME-26AUG28BMUVFB-VFB": {
+            "team": "VfB Stuttgart",
+            "opponent": "Bayern Munich",
+            "league": "soccer_germany_bundesliga",
+            "price_cents": 9,
+            "net_cost": 0.095733,
+            "true_prob": 0.12030460592146057,
+            "contracts": 35,
+            "opened_ts": 1786778342.9590006
+        },
+        "KXSCOTTISHPREMGAME-26AUG22DUUDUN-DUN": {
+            "team": "Dundee United",
+            "opponent": "Dundee FC",
+            "league": "soccer_spl",
+            "price_cents": 28,
+            "net_cost": 0.29411200000000004,
+            "true_prob": 0.49273272600644663,
+            "contracts": 34,
+            "opened_ts": 1786778351.6621985
         }
     },
     "closed": [],
