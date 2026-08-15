@@ -1,0 +1,38 @@
+{
+    "open": {
+        "KXLALIGAGAME-26AUG23ELCBAR-ELC": {
+            "team": "Elche CF",
+            "opponent": "Barcelona",
+            "league": "soccer_spain_la_liga",
+            "price_cents": 10,
+            "net_cost": 0.1063,
+            "true_prob": 0.11954581469412166,
+            "contracts": 17,
+            "opened_ts": 1786752638.187419
+        },
+        "KXEREDIVISIEGAME-26AUG16AJAHEE-HEE": {
+            "team": "Heerenveen",
+            "opponent": "Ajax",
+            "league": "soccer_netherlands_eredivisie",
+            "price_cents": 14,
+            "net_cost": 0.148428,
+            "true_prob": 0.15367312509585399,
+            "contracts": 5,
+            "opened_ts": 1786752643.5854976
+        },
+        "KXLIGAPORTUGALGAME-26AUG15RAVFCP-RAV": {
+            "team": "Rio Ave FC",
+            "opponent": "FC Porto",
+            "league": "soccer_portugal_primeira_liga",
+            "price_cents": 11,
+            "net_cost": 0.116853,
+            "true_prob": 0.1260722712168739,
+            "contracts": 11,
+            "opened_ts": 1786752644.0082378
+        }
+    },
+    "closed": [],
+    "wins": 0,
+    "losses": 0,
+    "total_pnl": 0.0
+}
