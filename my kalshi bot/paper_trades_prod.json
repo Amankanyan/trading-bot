@@ -20,16 +20,6 @@
             "contracts": 5,
             "opened_ts": 1786752643.5854976
         },
-        "KXLIGAPORTUGALGAME-26AUG15RAVFCP-RAV": {
-            "team": "Rio Ave FC",
-            "opponent": "FC Porto",
-            "league": "soccer_portugal_primeira_liga",
-            "price_cents": 11,
-            "net_cost": 0.116853,
-            "true_prob": 0.1260722712168739,
-            "contracts": 11,
-            "opened_ts": 1786752644.0082378
-        },
         "KXEPLGAME-26AUG23MCIBOU-BOU": {
             "team": "Bournemouth",
             "opponent": "Manchester City",
@@ -69,10 +59,45 @@
             "true_prob": 0.49273272600644663,
             "contracts": 34,
             "opened_ts": 1786778351.6621985
+        },
+        "KXEREDIVISIEGAME-26AUG16TWEZWO-ZWO": {
+            "team": "FC Zwolle",
+            "opponent": "FC Twente Enschede",
+            "league": "soccer_netherlands_eredivisie",
+            "price_cents": 8,
+            "net_cost": 0.085152,
+            "true_prob": 0.09380863039399626,
+            "contracts": 13,
+            "opened_ts": 1786843746.7212312
+        },
+        "KXLIGAPORTUGALGAME-26AUG17CASBEN-CAS": {
+            "team": "Casa Pia",
+            "opponent": "Benfica",
+            "league": "soccer_portugal_primeira_liga",
+            "price_cents": 6,
+            "net_cost": 0.063948,
+            "true_prob": 0.07621680808144236,
+            "contracts": 25,
+            "opened_ts": 1786843747.7856543
         }
     },
-    "closed": [],
+    "closed": [
+        {
+            "team": "Rio Ave FC",
+            "opponent": "FC Porto",
+            "league": "soccer_portugal_primeira_liga",
+            "price_cents": 11,
+            "net_cost": 0.116853,
+            "true_prob": 0.1260722712168739,
+            "contracts": 11,
+            "opened_ts": 1786752644.0082378,
+            "result": "no",
+            "won": false,
+            "pnl": -1.285383,
+            "closed_ts": 1786843738.4026647
+        }
+    ],
     "wins": 0,
-    "losses": 0,
-    "total_pnl": 0.0
+    "losses": 1,
+    "total_pnl": -1.285383
 }
