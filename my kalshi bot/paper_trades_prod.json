@@ -69,6 +69,66 @@
             "true_prob": 0.30031208134843707,
             "contracts": 3,
             "opened_ts": 1786907714.8051028
+        },
+        "KXLALIGAGAME-26AUG27BARATH-ATH": {
+            "team": "Athletic Bilbao",
+            "opponent": "Barcelona",
+            "league": "soccer_spain_la_liga",
+            "price_cents": 12,
+            "net_cost": 0.127392,
+            "true_prob": 0.13279714701327952,
+            "contracts": 6,
+            "opened_ts": 1786930032.434904
+        },
+        "KXSERIEAGAME-26AUG22INTMON-MON": {
+            "team": "Monza",
+            "opponent": "Inter Milan",
+            "league": "soccer_italy_serie_a",
+            "price_cents": 6,
+            "net_cost": 0.063948,
+            "true_prob": 0.07521982729263826,
+            "contracts": 23,
+            "opened_ts": 1786930033.1683276
+        },
+        "KXBUNDESLIGAGAME-26AUG29SVELEV-SVE": {
+            "team": "Elversberg",
+            "opponent": "Bayer Leverkusen",
+            "league": "soccer_germany_bundesliga",
+            "price_cents": 17,
+            "net_cost": 0.179877,
+            "true_prob": 0.1983106906991026,
+            "contracts": 15,
+            "opened_ts": 1786930035.7666857
+        },
+        "KXEREDIVISIEGAME-26AUG23PSVGRO-GRO": {
+            "team": "Groningen",
+            "opponent": "PSV Eindhoven",
+            "league": "soccer_netherlands_eredivisie",
+            "price_cents": 12,
+            "net_cost": 0.127392,
+            "true_prob": 0.13370223164754297,
+            "contracts": 7,
+            "opened_ts": 1786930043.7565386
+        },
+        "KXEREDIVISIEGAME-26AUG23CAMFEY-CAM": {
+            "team": "SC Cambuur",
+            "opponent": "Feyenoord",
+            "league": "soccer_netherlands_eredivisie",
+            "price_cents": 10,
+            "net_cost": 0.1063,
+            "true_prob": 0.11544890050889398,
+            "contracts": 12,
+            "opened_ts": 1786930044.2209911
+        },
+        "KXBRASILEIROGAME-26AUG23CFCCOR-CFC": {
+            "team": "Corinthians",
+            "opponent": "Coritiba",
+            "league": "soccer_brazil_campeonato",
+            "price_cents": 33,
+            "net_cost": 0.34547700000000003,
+            "true_prob": 0.38496379700806993,
+            "contracts": 21,
+            "opened_ts": 1786930048.965113
         }
     },
     "closed": [
