@@ -10,16 +10,6 @@
             "contracts": 17,
             "opened_ts": 1786752638.187419
         },
-        "KXEREDIVISIEGAME-26AUG16AJAHEE-HEE": {
-            "team": "Heerenveen",
-            "opponent": "Ajax",
-            "league": "soccer_netherlands_eredivisie",
-            "price_cents": 14,
-            "net_cost": 0.148428,
-            "true_prob": 0.15367312509585399,
-            "contracts": 5,
-            "opened_ts": 1786752643.5854976
-        },
         "KXEPLGAME-26AUG23MCIBOU-BOU": {
             "team": "Bournemouth",
             "opponent": "Manchester City",
@@ -60,16 +50,6 @@
             "contracts": 34,
             "opened_ts": 1786778351.6621985
         },
-        "KXEREDIVISIEGAME-26AUG16TWEZWO-ZWO": {
-            "team": "FC Zwolle",
-            "opponent": "FC Twente Enschede",
-            "league": "soccer_netherlands_eredivisie",
-            "price_cents": 8,
-            "net_cost": 0.085152,
-            "true_prob": 0.09380863039399626,
-            "contracts": 13,
-            "opened_ts": 1786843746.7212312
-        },
         "KXLIGAPORTUGALGAME-26AUG17CASBEN-CAS": {
             "team": "Casa Pia",
             "opponent": "Benfica",
@@ -79,6 +59,16 @@
             "true_prob": 0.07621680808144236,
             "contracts": 25,
             "opened_ts": 1786843747.7856543
+        },
+        "KXMLSGAME-26AUG19DCUNE-NE": {
+            "team": "New England Revolution",
+            "opponent": "D.C. United",
+            "league": "soccer_usa_mls",
+            "price_cents": 28,
+            "net_cost": 0.29411200000000004,
+            "true_prob": 0.30031208134843707,
+            "contracts": 3,
+            "opened_ts": 1786907714.8051028
         }
     },
     "closed": [
@@ -95,9 +85,37 @@
             "won": false,
             "pnl": -1.285383,
             "closed_ts": 1786843738.4026647
+        },
+        {
+            "team": "Heerenveen",
+            "opponent": "Ajax",
+            "league": "soccer_netherlands_eredivisie",
+            "price_cents": 14,
+            "net_cost": 0.148428,
+            "true_prob": 0.15367312509585399,
+            "contracts": 5,
+            "opened_ts": 1786752643.5854976,
+            "result": "no",
+            "won": false,
+            "pnl": -0.74214,
+            "closed_ts": 1786907704.8371975
+        },
+        {
+            "team": "FC Zwolle",
+            "opponent": "FC Twente Enschede",
+            "league": "soccer_netherlands_eredivisie",
+            "price_cents": 8,
+            "net_cost": 0.085152,
+            "true_prob": 0.09380863039399626,
+            "contracts": 13,
+            "opened_ts": 1786843746.7212312,
+            "result": "no",
+            "won": false,
+            "pnl": -1.106976,
+            "closed_ts": 1786907705.2772381
         }
     ],
     "wins": 0,
-    "losses": 1,
-    "total_pnl": -1.285383
+    "losses": 3,
+    "total_pnl": -3.134499
 }
