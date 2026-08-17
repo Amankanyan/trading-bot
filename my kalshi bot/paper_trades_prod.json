@@ -129,6 +129,16 @@
             "true_prob": 0.38496379700806993,
             "contracts": 21,
             "opened_ts": 1786930048.965113
+        },
+        "KXBUNDESLIGAGAME-26AUG29BVBHSV-HSV": {
+            "team": "Hamburger SV",
+            "opponent": "Borussia Dortmund",
+            "league": "soccer_germany_bundesliga",
+            "price_cents": 10,
+            "net_cost": 0.1063,
+            "true_prob": 0.11564723719303682,
+            "contracts": 12,
+            "opened_ts": 1786972641.4650946
         }
     },
     "closed": [
