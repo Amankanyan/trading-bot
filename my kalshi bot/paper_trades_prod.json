@@ -159,6 +159,16 @@
             "true_prob": 0.41196665031878377,
             "contracts": 2,
             "opened_ts": 1787066222.8993878
+        },
+        "KXBUNDESLIGAGAME-26AUG28BMUVFB-TIE": {
+            "team": "Draw",
+            "opponent": "Bayern Munich vs VfB Stuttgart",
+            "league": "soccer_germany_bundesliga",
+            "price_cents": 14,
+            "net_cost": 0.148428,
+            "true_prob": 0.15545980683913607,
+            "contracts": 6,
+            "opened_ts": 1787067446.0369198
         }
     },
     "closed": [
