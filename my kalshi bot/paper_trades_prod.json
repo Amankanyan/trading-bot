@@ -50,16 +50,6 @@
             "contracts": 34,
             "opened_ts": 1786778351.6621985
         },
-        "KXLIGAPORTUGALGAME-26AUG17CASBEN-CAS": {
-            "team": "Casa Pia",
-            "opponent": "Benfica",
-            "league": "soccer_portugal_primeira_liga",
-            "price_cents": 6,
-            "net_cost": 0.063948,
-            "true_prob": 0.07621680808144236,
-            "contracts": 25,
-            "opened_ts": 1786843747.7856543
-        },
         "KXMLSGAME-26AUG19DCUNE-NE": {
             "team": "New England Revolution",
             "opponent": "D.C. United",
@@ -183,9 +173,23 @@
             "won": false,
             "pnl": -1.106976,
             "closed_ts": 1786907705.2772381
+        },
+        {
+            "team": "Casa Pia",
+            "opponent": "Benfica",
+            "league": "soccer_portugal_primeira_liga",
+            "price_cents": 6,
+            "net_cost": 0.063948,
+            "true_prob": 0.07621680808144236,
+            "contracts": 25,
+            "opened_ts": 1786843747.7856543,
+            "result": "no",
+            "won": false,
+            "pnl": -1.5987,
+            "closed_ts": 1787016207.9459145
         }
     ],
     "wins": 0,
-    "losses": 3,
-    "total_pnl": -3.134499
+    "losses": 4,
+    "total_pnl": -4.733199
 }
