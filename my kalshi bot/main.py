@@ -574,6 +574,37 @@ def find_matching_ticker(
 
     return matches
 
+def find_tie_ticker(
+    home_team: str,
+    away_team: str,
+    kalshi_markets: List[Dict[str, Any]],
+) -> List[Dict[str, Any]]:
+    """
+    Locate the Tie/Draw contract for a fixture, confirmed the same way as
+    find_matching_ticker: both the home and away side must independently
+    match a sibling market in the same event so the right Tie leg is picked
+    when several fixtures' markets are in the candidate list together.
+    """
+    by_event: Dict[str, List[Dict[str, Any]]] = {}
+    for m in kalshi_markets:
+        by_event.setdefault(m.get("event_ticker"), []).append(m)
+
+    matches = []
+
+    for m in kalshi_markets:
+        if (m.get("yes_sub_title") or "").strip().lower() != "tie":
+            continue
+
+        siblings = [s for s in by_event.get(m.get("event_ticker"), []) if s is not m]
+        home_confirmed = any(_teams_match(home_team, s.get("yes_sub_title") or "") for s in siblings)
+        away_confirmed = any(_teams_match(away_team, s.get("yes_sub_title") or "") for s in siblings)
+        if not (home_confirmed and away_confirmed):
+            continue
+
+        matches.append(m)
+
+    return matches
+
 def _price_to_cents(value: Any) -> Optional[int]:
     try:
         return int(round(float(value) * 100))
@@ -900,14 +931,24 @@ def run_trading_engine() -> None:
             home_team = event.get("home_team", "")
             away_team = event.get("away_team", "")
 
+            # One candidate per tradeable leg of this fixture: both teams to
+            # win, plus the Draw if Pinnacle quoted one (it always does for
+            # soccer 3-way markets). Everything below this point is generic
+            # over (search_name, opponent, true_prob, matches) — a Draw
+            # candidate runs through the exact same EV/Kelly/exposure/order
+            # pipeline as a team-win candidate, just matched against Kalshi's
+            # Tie contract instead of a team contract.
+            candidates: List[Tuple[str, str, float, List[Dict[str, Any]]]] = []
             for team_name, true_prob in devigged_probs.items():
-                if team_name not in (home_team, away_team):
-                    continue
+                if team_name in (home_team, away_team):
+                    opponent = away_team if team_name == home_team else home_team
+                    matches = find_matching_ticker(team_name, opponent, kalshi_markets)
+                    candidates.append((team_name, opponent, true_prob, matches))
+                elif team_name.strip().lower() == "draw":
+                    matches = find_tie_ticker(home_team, away_team, kalshi_markets)
+                    candidates.append(("Draw", f"{home_team} vs {away_team}", true_prob, matches))
 
-                search_name = team_name
-                opponent = away_team if team_name == home_team else home_team
-
-                matches = find_matching_ticker(search_name, opponent, kalshi_markets)
+            for search_name, opponent, true_prob, matches in candidates:
                 if not matches:
                     logging.info(f"No Kalshi market matched {search_name} vs {opponent} ({sport_key})")
                 for m in matches:
