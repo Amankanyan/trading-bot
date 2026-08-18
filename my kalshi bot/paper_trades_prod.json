@@ -129,6 +129,26 @@
             "true_prob": 0.11564723719303682,
             "contracts": 12,
             "opened_ts": 1786972641.4650946
+        },
+        "KXMLSGAME-26AUG19CLBMTL-MTL": {
+            "team": "CF Montreal",
+            "opponent": "Columbus Crew SC",
+            "league": "soccer_usa_mls",
+            "price_cents": 19,
+            "net_cost": 0.200773,
+            "true_prob": 0.20821404619034536,
+            "contracts": 5,
+            "opened_ts": 1787058821.211549
+        },
+        "KXBRASILEIROGAME-26AUG22FLUCR-CR": {
+            "team": "Remo",
+            "opponent": "Fluminense",
+            "league": "soccer_brazil_campeonato",
+            "price_cents": 11,
+            "net_cost": 0.116853,
+            "true_prob": 0.12535904800984818,
+            "contracts": 10,
+            "opened_ts": 1787058825.1749928
         }
     },
     "closed": [
