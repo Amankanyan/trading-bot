@@ -149,6 +149,16 @@
             "true_prob": 0.12535904800984818,
             "contracts": 10,
             "opened_ts": 1787058825.1749928
+        },
+        "KXMLSGAME-26AUG19COLLAFC-LAFC": {
+            "team": "Los Angeles FC",
+            "opponent": "Colorado Rapids",
+            "league": "soccer_usa_mls",
+            "price_cents": 39,
+            "net_cost": 0.40665300000000004,
+            "true_prob": 0.41196665031878377,
+            "contracts": 2,
+            "opened_ts": 1787066222.8993878
         }
     },
     "closed": [
