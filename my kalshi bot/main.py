@@ -63,6 +63,10 @@ MIN_EV_THRESHOLD = 0.005           # Minimum +0.5% EV. Lowered from 4% purely to
                                     # in the log), so at 4% the paper ledger would stay
                                     # empty for weeks. This threshold is noisier and
                                     # should NOT be used with DRY_RUN off.
+# preflight() refuses to start live (non-DRY_RUN) trading below this floor —
+# the comment above was a paper-only intent, not an enforced one, so a
+# forgotten env var could otherwise put real money on 0.5%-edge noise.
+LIVE_MIN_EV_FLOOR = 0.02
 HARD_STOP_LOSS_PROB = 0.32         # Absolute floor: liquidate if win prob < 32%
 STOP_LOSS_EDGE_DROP = 0.15         # Relative floor: liquidate if prob falls 15pp below entry prob
 MAX_SLIPPAGE_PCT = 0.30            # Slippage floor: reject bids below 70% of fair value
@@ -109,6 +113,7 @@ LEAGUE_MAP: Dict[str, str] = {
     "soccer_spl": "KXSCOTTISHPREMGAME",
     "soccer_brazil_campeonato": "KXBRASILEIROGAME",
 }
+SERIES_TO_SPORT: Dict[str, str] = {v: k for k, v in LEAGUE_MAP.items()}
 # 12 leagues x 1 credit/cycle. At 500 credits/month this is the slowest
 # cadence that still finishes every league before quota resets are likely,
 # with headroom for preflight checks and manual runs. Override via env for
@@ -341,7 +346,18 @@ def current_total_exposure() -> float:
     Calculates total exposure by summing filled positions from disk state
     AND querying the exchange dynamically for resting/unfilled orders.
     Filters out already-tracked orders to prevent double-counting.
+
+    In DRY_RUN, there are no real positions or resting orders, so exposure
+    is computed against the paper ledger's open trades instead — otherwise
+    every paper entry gets sized as if it were the only position ever
+    taken, and MAX_TOTAL_EXPOSURE never actually gates anything.
     """
+    if DRY_RUN:
+        return sum(
+            entry["contracts"] * entry["net_cost"]
+            for entry in paper_ledger["open"].values()
+        )
+
     # Positions adopted from the exchange have no local buy_price; they carry a
     # cost_basis taken from the exchange instead. Never assume either exists.
     total = 0.0
@@ -641,6 +657,7 @@ def reconcile_with_exchange() -> None:
                 "cost_basis": info["cost_basis"],
                 "count": qty,
                 "team": team_from_ticker(ticker),
+                "league": league_from_ticker(ticker),
                 "entry_true_prob": None,
                 "pending_order_id": None,
                 "pending_side": None,
@@ -666,6 +683,13 @@ def reconcile_with_exchange() -> None:
 
     save_positions(active_positions)
 
+
+def league_from_ticker(ticker: str) -> Optional[str]:
+    """Recover the odds-api sport key for an orphaned position from its ticker prefix."""
+    for series_ticker, sport_key in SERIES_TO_SPORT.items():
+        if ticker.startswith(series_ticker + "-"):
+            return sport_key
+    return None
 
 def team_from_ticker(ticker: str) -> Optional[str]:
     """
@@ -823,16 +847,20 @@ def run_trading_engine() -> None:
     reconcile_with_exchange()
     resolve_paper_trades()
 
-    sharp_probabilities: Dict[str, float] = {}
+    # Keyed by (sport_key, team_name), not team_name alone: a flat team-name
+    # key would silently collide if two tracked leagues ever share a club
+    # name, and the stop-loss engine would then read the wrong league's
+    # probability for a position without any error or warning.
+    sharp_probabilities: Dict[Tuple[str, str], float] = {}
 
     # --- STEP 1: GLOBAL DATA INGESTION (DECOUPLED FROM ENTRY LOCKOUTS) ---
-    for events in events_by_league.values():
+    for sport_key, events in events_by_league.items():
         for event in events:
             try:
                 pinnacle_outcomes = event['bookmakers'][0]['markets'][0]['outcomes']
                 devigged_probs = get_devigged_probs(pinnacle_outcomes)
                 for team_name, prob in devigged_probs.items():
-                    sharp_probabilities[team_name] = prob
+                    sharp_probabilities[(sport_key, team_name)] = prob
             except (IndexError, KeyError):
                 continue
 
@@ -885,6 +913,8 @@ def run_trading_engine() -> None:
                 for m in matches:
                     ticker = m.get('ticker', '')
                     if ticker in active_positions:
+                        continue
+                    if DRY_RUN and ticker in paper_ledger["open"]:
                         continue
 
                     try:
@@ -940,11 +970,17 @@ def run_trading_engine() -> None:
                     )
                     if DRY_RUN:
                         logging.info(f"[DRY RUN] Would buy {contracts} {ticker} @ {best_ask}c")
-                        if ticker not in paper_ledger["open"]:
-                            record_paper_entry(
-                                ticker, search_name, opponent, sport_key,
-                                best_ask, net_cost, true_prob, contracts,
-                            )
+                        # The pre-loop skip above guarantees this ticker has no
+                        # open paper trade yet, so this is always a genuinely
+                        # new entry — commit its cost so the NEXT candidate's
+                        # Kelly sizing sees a smaller effective bankroll,
+                        # instead of every trade this cycle being sized as if
+                        # it were the only one taken.
+                        record_paper_entry(
+                            ticker, search_name, opponent, sport_key,
+                            best_ask, net_cost, true_prob, contracts,
+                        )
+                        committed_this_cycle += contracts * net_cost
                         continue
 
                     client_id = new_client_order_id()
@@ -975,6 +1011,7 @@ def run_trading_engine() -> None:
                             "buy_price": best_ask,
                             "count": filled,
                             "team": search_name,
+                            "league": sport_key,
                             "entry_true_prob": true_prob,
                             "pending_order_id": order_id if partial else None,
                             "pending_side": "buy" if partial else None,
@@ -989,6 +1026,7 @@ def run_trading_engine() -> None:
                             "buy_price": best_ask,
                             "count": 0,
                             "team": search_name,
+                            "league": sport_key,
                             "entry_true_prob": true_prob,
                             "pending_order_id": order_id,
                             "pending_side": "buy",
@@ -1012,7 +1050,7 @@ def run_trading_engine() -> None:
             continue
 
         team_name = pos_data.get("team")
-        current_prob = sharp_probabilities.get(team_name)
+        current_prob = sharp_probabilities.get((pos_data.get("league"), team_name))
 
         if current_prob is None:
             # A pre-match odds feed drops fixtures once they kick off, so missing
@@ -1127,6 +1165,15 @@ def _handle_signal(signum, _frame):
 def preflight() -> bool:
     """Fail fast and loudly on a misconfigured start, rather than mid-trade."""
     ok = True
+
+    if not DRY_RUN and MIN_EV_THRESHOLD < LIVE_MIN_EV_FLOOR:
+        logging.critical(
+            f"MIN_EV_THRESHOLD ({MIN_EV_THRESHOLD*100:.2f}%) is below the "
+            f"{LIVE_MIN_EV_FLOOR*100:.0f}% floor for live trading with DRY_RUN off. "
+            f"This threshold was lowered for paper-trading data collection only — "
+            f"raise it (or the floor, deliberately) before trading real money on it."
+        )
+        return False
 
     if not os.path.exists(KALSHI_KEY_PATH):
         logging.critical(f"Private key not found at {KALSHI_KEY_PATH}")
