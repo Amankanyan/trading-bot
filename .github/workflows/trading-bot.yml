@@ -5,9 +5,19 @@ name: Kalshi Trading Bot
 # bot is back up within minutes. concurrency + cancel-in-progress:false
 # means a new scheduled run queues behind a still-running one instead of
 # starting a second bot in parallel.
+#
+# Cadence is capped by the-odds-api's free tier (500 requests/month): each
+# cycle costs 12 credits (one per configured league), and the hosted
+# runner's ~6h hard job limit means every cron firing only ever completes
+# ONE cycle before being killed — it never survives to reach its own
+# internal sleep-and-loop. Firing every 6h (4 cycles/day) demands ~1440
+# credits/month against a 500 budget, which exhausts the quota in under
+# two weeks and then hard-stops the bot at preflight (MIN_ODDS_QUOTA)
+# until the next monthly reset. Once a day keeps usage (~360 credits/month)
+# safely under the cap with headroom for manual workflow_dispatch runs.
 on:
   schedule:
-    - cron: "0 */6 * * *"
+    - cron: "0 8 * * *"
   workflow_dispatch: {}
 
 concurrency:
