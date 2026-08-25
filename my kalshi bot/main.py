@@ -114,11 +114,15 @@ LEAGUE_MAP: Dict[str, str] = {
     "soccer_brazil_campeonato": "KXBRASILEIROGAME",
 }
 SERIES_TO_SPORT: Dict[str, str] = {v: k for k, v in LEAGUE_MAP.items()}
-# 12 leagues x 1 credit/cycle. At 500 credits/month this is the slowest
-# cadence that still finishes every league before quota resets are likely,
-# with headroom for preflight checks and manual runs. Override via env for
-# faster iteration (e.g. CYCLE_SLEEP_SECONDS=1800 for a single-league test).
-CYCLE_SLEEP_SECONDS = int(os.environ.get("CYCLE_SLEEP_SECONDS", str(6 * 3600)))
+# 12 leagues x 1 credit/cycle. The previous 6h default was wrong: 12 x 4
+# cycles/day = 48/day, which burns a 500/month quota in ~10 days, not a
+# month — confirmed by the quota actually running out after 9 days of real
+# use, which silently killed every cycle (preflight correctly refuses to
+# trade on stale data) until it resets. 500 / 30 days / 12 leagues ≈ 1.4
+# cycles/day; 24h leaves real headroom for preflight checks and manual runs
+# without cutting it that close again. Override via env for faster
+# iteration (e.g. CYCLE_SLEEP_SECONDS=1800 for a single-league test).
+CYCLE_SLEEP_SECONDS = int(os.environ.get("CYCLE_SLEEP_SECONDS", str(24 * 3600)))
 MIN_ODDS_QUOTA = 10                # Stop pulling more leagues once remaining quota drops below this
 
 # =====================================================================
