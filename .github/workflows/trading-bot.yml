@@ -10,14 +10,18 @@ name: Kalshi Trading Bot
 # cycle costs 12 credits (one per configured league), and the hosted
 # runner's ~6h hard job limit means every cron firing only ever completes
 # ONE cycle before being killed — it never survives to reach its own
-# internal sleep-and-loop. Firing every 6h (4 cycles/day) demands ~1440
-# credits/month against a 500 budget, which exhausts the quota in under
-# two weeks and then hard-stops the bot at preflight (MIN_ODDS_QUOTA)
-# until the next monthly reset. Once a day keeps usage (~360 credits/month)
-# safely under the cap with headroom for manual workflow_dispatch runs.
+# internal sleep-and-loop, so cron frequency (not CYCLE_SLEEP_SECONDS) is
+# the real cadence lever. The local Mac instance that used to share this
+# same odds-api key has been permanently stopped, so the full quota is
+# available to this cloud job alone now. 9 firings/week (7 daily + 2 extra)
+# x 12 credits x ~4.3 weeks/month ≈ 465/month — close to the 500 budget
+# while still leaving headroom for occasional manual workflow_dispatch
+# runs, without the day-of-month drift a "every N days" cron pattern gets
+# at month boundaries.
 on:
   schedule:
     - cron: "0 8 * * *"
+    - cron: "0 20 * * 1,4"
   workflow_dispatch: {}
 
 concurrency:
