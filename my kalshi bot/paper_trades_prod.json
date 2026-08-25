@@ -1,35 +1,5 @@
 {
     "open": {
-        "KXLALIGAGAME-26AUG23ELCBAR-ELC": {
-            "team": "Elche CF",
-            "opponent": "Barcelona",
-            "league": "soccer_spain_la_liga",
-            "price_cents": 10,
-            "net_cost": 0.1063,
-            "true_prob": 0.11954581469412166,
-            "contracts": 17,
-            "opened_ts": 1786752638.187419
-        },
-        "KXEPLGAME-26AUG23MCIBOU-BOU": {
-            "team": "Bournemouth",
-            "opponent": "Manchester City",
-            "league": "soccer_epl",
-            "price_cents": 14,
-            "net_cost": 0.148428,
-            "true_prob": 0.15874478348057017,
-            "contracts": 10,
-            "opened_ts": 1786778337.1789205
-        },
-        "KXLALIGAGAME-26AUG22ESPRMA-ESP": {
-            "team": "Espanyol",
-            "opponent": "Real Madrid",
-            "league": "soccer_spain_la_liga",
-            "price_cents": 15,
-            "net_cost": 0.15892499999999998,
-            "true_prob": 0.16638959311749307,
-            "contracts": 6,
-            "opened_ts": 1786778339.4628713
-        },
         "KXBUNDESLIGAGAME-26AUG28BMUVFB-VFB": {
             "team": "VfB Stuttgart",
             "opponent": "Bayern Munich",
@@ -39,26 +9,6 @@
             "true_prob": 0.12030460592146057,
             "contracts": 35,
             "opened_ts": 1786778342.9590006
-        },
-        "KXSCOTTISHPREMGAME-26AUG22DUUDUN-DUN": {
-            "team": "Dundee United",
-            "opponent": "Dundee FC",
-            "league": "soccer_spl",
-            "price_cents": 28,
-            "net_cost": 0.29411200000000004,
-            "true_prob": 0.49273272600644663,
-            "contracts": 34,
-            "opened_ts": 1786778351.6621985
-        },
-        "KXMLSGAME-26AUG19DCUNE-NE": {
-            "team": "New England Revolution",
-            "opponent": "D.C. United",
-            "league": "soccer_usa_mls",
-            "price_cents": 28,
-            "net_cost": 0.29411200000000004,
-            "true_prob": 0.30031208134843707,
-            "contracts": 3,
-            "opened_ts": 1786907714.8051028
         },
         "KXLALIGAGAME-26AUG27BARATH-ATH": {
             "team": "Athletic Bilbao",
@@ -70,16 +20,6 @@
             "contracts": 6,
             "opened_ts": 1786930032.434904
         },
-        "KXSERIEAGAME-26AUG22INTMON-MON": {
-            "team": "Monza",
-            "opponent": "Inter Milan",
-            "league": "soccer_italy_serie_a",
-            "price_cents": 6,
-            "net_cost": 0.063948,
-            "true_prob": 0.07521982729263826,
-            "contracts": 23,
-            "opened_ts": 1786930033.1683276
-        },
         "KXBUNDESLIGAGAME-26AUG29SVELEV-SVE": {
             "team": "Elversberg",
             "opponent": "Bayer Leverkusen",
@@ -90,36 +30,6 @@
             "contracts": 15,
             "opened_ts": 1786930035.7666857
         },
-        "KXEREDIVISIEGAME-26AUG23PSVGRO-GRO": {
-            "team": "Groningen",
-            "opponent": "PSV Eindhoven",
-            "league": "soccer_netherlands_eredivisie",
-            "price_cents": 12,
-            "net_cost": 0.127392,
-            "true_prob": 0.13370223164754297,
-            "contracts": 7,
-            "opened_ts": 1786930043.7565386
-        },
-        "KXEREDIVISIEGAME-26AUG23CAMFEY-CAM": {
-            "team": "SC Cambuur",
-            "opponent": "Feyenoord",
-            "league": "soccer_netherlands_eredivisie",
-            "price_cents": 10,
-            "net_cost": 0.1063,
-            "true_prob": 0.11544890050889398,
-            "contracts": 12,
-            "opened_ts": 1786930044.2209911
-        },
-        "KXBRASILEIROGAME-26AUG23CFCCOR-CFC": {
-            "team": "Corinthians",
-            "opponent": "Coritiba",
-            "league": "soccer_brazil_campeonato",
-            "price_cents": 33,
-            "net_cost": 0.34547700000000003,
-            "true_prob": 0.38496379700806993,
-            "contracts": 21,
-            "opened_ts": 1786930048.965113
-        },
         "KXBUNDESLIGAGAME-26AUG29BVBHSV-HSV": {
             "team": "Hamburger SV",
             "opponent": "Borussia Dortmund",
@@ -129,36 +39,6 @@
             "true_prob": 0.11564723719303682,
             "contracts": 12,
             "opened_ts": 1786972641.4650946
-        },
-        "KXMLSGAME-26AUG19CLBMTL-MTL": {
-            "team": "CF Montreal",
-            "opponent": "Columbus Crew SC",
-            "league": "soccer_usa_mls",
-            "price_cents": 19,
-            "net_cost": 0.200773,
-            "true_prob": 0.20821404619034536,
-            "contracts": 5,
-            "opened_ts": 1787058821.211549
-        },
-        "KXBRASILEIROGAME-26AUG22FLUCR-CR": {
-            "team": "Remo",
-            "opponent": "Fluminense",
-            "league": "soccer_brazil_campeonato",
-            "price_cents": 11,
-            "net_cost": 0.116853,
-            "true_prob": 0.12535904800984818,
-            "contracts": 10,
-            "opened_ts": 1787058825.1749928
-        },
-        "KXMLSGAME-26AUG19COLLAFC-LAFC": {
-            "team": "Los Angeles FC",
-            "opponent": "Colorado Rapids",
-            "league": "soccer_usa_mls",
-            "price_cents": 39,
-            "net_cost": 0.40665300000000004,
-            "true_prob": 0.41196665031878377,
-            "contracts": 2,
-            "opened_ts": 1787066222.8993878
         },
         "KXBUNDESLIGAGAME-26AUG28BMUVFB-TIE": {
             "team": "Draw",
@@ -227,9 +107,177 @@
             "won": false,
             "pnl": -1.5987,
             "closed_ts": 1787016207.9459145
+        },
+        {
+            "team": "Elche CF",
+            "opponent": "Barcelona",
+            "league": "soccer_spain_la_liga",
+            "price_cents": 10,
+            "net_cost": 0.1063,
+            "true_prob": 0.11954581469412166,
+            "contracts": 17,
+            "opened_ts": 1786752638.187419,
+            "result": "no",
+            "won": false,
+            "pnl": -1.8071000000000002,
+            "closed_ts": 1787652736.611383
+        },
+        {
+            "team": "Bournemouth",
+            "opponent": "Manchester City",
+            "league": "soccer_epl",
+            "price_cents": 14,
+            "net_cost": 0.148428,
+            "true_prob": 0.15874478348057017,
+            "contracts": 10,
+            "opened_ts": 1786778337.1789205,
+            "result": "no",
+            "won": false,
+            "pnl": -1.48428,
+            "closed_ts": 1787652736.8321762
+        },
+        {
+            "team": "Espanyol",
+            "opponent": "Real Madrid",
+            "league": "soccer_spain_la_liga",
+            "price_cents": 15,
+            "net_cost": 0.15892499999999998,
+            "true_prob": 0.16638959311749307,
+            "contracts": 6,
+            "opened_ts": 1786778339.4628713,
+            "result": "no",
+            "won": false,
+            "pnl": -0.9535499999999999,
+            "closed_ts": 1787652737.035577
+        },
+        {
+            "team": "Dundee United",
+            "opponent": "Dundee FC",
+            "league": "soccer_spl",
+            "price_cents": 28,
+            "net_cost": 0.29411200000000004,
+            "true_prob": 0.49273272600644663,
+            "contracts": 34,
+            "opened_ts": 1786778351.6621985,
+            "result": "yes",
+            "won": true,
+            "pnl": 24.000192,
+            "closed_ts": 1787652737.470936
+        },
+        {
+            "team": "New England Revolution",
+            "opponent": "D.C. United",
+            "league": "soccer_usa_mls",
+            "price_cents": 28,
+            "net_cost": 0.29411200000000004,
+            "true_prob": 0.30031208134843707,
+            "contracts": 3,
+            "opened_ts": 1786907714.8051028,
+            "result": "yes",
+            "won": true,
+            "pnl": 2.117664,
+            "closed_ts": 1787652737.6758242
+        },
+        {
+            "team": "Monza",
+            "opponent": "Inter Milan",
+            "league": "soccer_italy_serie_a",
+            "price_cents": 6,
+            "net_cost": 0.063948,
+            "true_prob": 0.07521982729263826,
+            "contracts": 23,
+            "opened_ts": 1786930033.1683276,
+            "result": "no",
+            "won": false,
+            "pnl": -1.4708040000000002,
+            "closed_ts": 1787652738.1014001
+        },
+        {
+            "team": "Groningen",
+            "opponent": "PSV Eindhoven",
+            "league": "soccer_netherlands_eredivisie",
+            "price_cents": 12,
+            "net_cost": 0.127392,
+            "true_prob": 0.13370223164754297,
+            "contracts": 7,
+            "opened_ts": 1786930043.7565386,
+            "result": "no",
+            "won": false,
+            "pnl": -0.8917440000000001,
+            "closed_ts": 1787652738.536726
+        },
+        {
+            "team": "SC Cambuur",
+            "opponent": "Feyenoord",
+            "league": "soccer_netherlands_eredivisie",
+            "price_cents": 10,
+            "net_cost": 0.1063,
+            "true_prob": 0.11544890050889398,
+            "contracts": 12,
+            "opened_ts": 1786930044.2209911,
+            "result": "no",
+            "won": false,
+            "pnl": -1.2756,
+            "closed_ts": 1787652738.74987
+        },
+        {
+            "team": "Corinthians",
+            "opponent": "Coritiba",
+            "league": "soccer_brazil_campeonato",
+            "price_cents": 33,
+            "net_cost": 0.34547700000000003,
+            "true_prob": 0.38496379700806993,
+            "contracts": 21,
+            "opened_ts": 1786930048.965113,
+            "result": "yes",
+            "won": true,
+            "pnl": 13.744983,
+            "closed_ts": 1787652738.949905
+        },
+        {
+            "team": "CF Montreal",
+            "opponent": "Columbus Crew SC",
+            "league": "soccer_usa_mls",
+            "price_cents": 19,
+            "net_cost": 0.200773,
+            "true_prob": 0.20821404619034536,
+            "contracts": 5,
+            "opened_ts": 1787058821.211549,
+            "result": "yes",
+            "won": true,
+            "pnl": 3.996135,
+            "closed_ts": 1787652739.424931
+        },
+        {
+            "team": "Remo",
+            "opponent": "Fluminense",
+            "league": "soccer_brazil_campeonato",
+            "price_cents": 11,
+            "net_cost": 0.116853,
+            "true_prob": 0.12535904800984818,
+            "contracts": 10,
+            "opened_ts": 1787058825.1749928,
+            "result": "no",
+            "won": false,
+            "pnl": -1.16853,
+            "closed_ts": 1787652739.631521
+        },
+        {
+            "team": "Los Angeles FC",
+            "opponent": "Colorado Rapids",
+            "league": "soccer_usa_mls",
+            "price_cents": 39,
+            "net_cost": 0.40665300000000004,
+            "true_prob": 0.41196665031878377,
+            "contracts": 2,
+            "opened_ts": 1787066222.8993878,
+            "result": "no",
+            "won": false,
+            "pnl": -0.8133060000000001,
+            "closed_ts": 1787652739.8367622
         }
     ],
-    "wins": 0,
-    "losses": 4,
-    "total_pnl": -4.733199
+    "wins": 4,
+    "losses": 12,
+    "total_pnl": 29.260860999999995
 }

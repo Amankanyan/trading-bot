@@ -57,15 +57,19 @@ ODDS_API_KEY = os.environ.get("ODDS_API_KEY", "d71d5fe01a2b95e83abf43c1137ac323"
 
 MAX_RISK_PER_TRADE = 0.02          # Hard cap: 2% risk per trade
 MAX_TOTAL_EXPOSURE = 0.20          # Hard cap: 20% max portfolio exposure
-MIN_EV_THRESHOLD = 0.005           # Minimum +0.5% EV. Lowered from 4% purely to
-                                    # accumulate paper-trade data faster in DRY_RUN —
-                                    # a 4% edge basically never appears (see EV history
-                                    # in the log), so at 4% the paper ledger would stay
-                                    # empty for weeks. This threshold is noisier and
-                                    # should NOT be used with DRY_RUN off.
-# preflight() refuses to start live (non-DRY_RUN) trading below this floor —
-# the comment above was a paper-only intent, not an enforced one, so a
-# forgotten env var could otherwise put real money on 0.5%-edge noise.
+# Minimum +2% EV. Was briefly 0.5% to fill the paper ledger faster, but that
+# turned out to be below the noise floor: proportional devigging alone was
+# worth ~1pp of fake edge (see get_devigged_probs), and of the first 16
+# settled paper trades every sub-1.4% edge lost (0W-12L) while both >3.9%
+# edges won. A threshold under the model's own error bar just samples that
+# error. Equally important, it must not sit below LIVE_MIN_EV_FLOOR: paper
+# trading is only evidence about live trading if both use the same entry
+# rule, and a 0.5% paper threshold was validating a strategy that live mode
+# would refuse to run. Cost of this: far fewer entries, so the ledger grows
+# slowly — that is the price of each entry meaning something.
+MIN_EV_THRESHOLD = 0.02
+# preflight() refuses to start live (non-DRY_RUN) trading below this floor,
+# so a forgotten env var cannot put real money on sub-noise "edges".
 LIVE_MIN_EV_FLOOR = 0.02
 HARD_STOP_LOSS_PROB = 0.32         # Absolute floor: liquidate if win prob < 32%
 STOP_LOSS_EDGE_DROP = 0.15         # Relative floor: liquidate if prob falls 15pp below entry prob
@@ -399,7 +403,60 @@ def current_total_exposure() -> float:
 # MATHEMATICAL & VALIDATION ENGINE
 # =====================================================================
 
+def _shin_devig(q: List[float]) -> Optional[List[float]]:
+    """
+    Shin's method: recover true probabilities from gross implied ones.
+
+    Solves for the insider-trading proportion z in
+        p_i = [sqrt(z^2 + 4(1-z) q_i^2 / B) - z] / (2(1-z)),  B = sum(q)
+    by bisecting on z until sum(p_i) == 1. sum(p) decreases monotonically
+    in z, so bisection is safe. Returns None if the book is degenerate.
+    """
+    B = sum(q)
+    if B <= 1.0:
+        return None  # no overround to remove; caller falls back
+
+    def probs(z: float) -> List[float]:
+        return [
+            ((z * z + 4.0 * (1.0 - z) * x * x / B) ** 0.5 - z) / (2.0 * (1.0 - z))
+            for x in q
+        ]
+
+    lo, hi = 0.0, 0.99
+    for _ in range(60):
+        mid = (lo + hi) / 2.0
+        if sum(probs(mid)) > 1.0:
+            lo = mid
+        else:
+            hi = mid
+
+    p = probs((lo + hi) / 2.0)
+    total = sum(p)
+    if total <= 0 or any(x <= 0 for x in p):
+        return None
+    return [x / total for x in p]  # normalise away residual solver error
+
 def get_devigged_probs(outcomes: List[Dict[str, Any]]) -> Dict[str, float]:
+    """
+    Convert bookmaker decimal odds into true probabilities, removing the vig.
+
+    Uses Shin's method rather than proportional (q_i / sum(q)) devigging.
+    Proportional devigging assumes the margin is spread evenly in relative
+    terms, which is empirically false: books load more margin onto longshots
+    (the favourite-longshot bias). On a typical 3-way soccer book that makes
+    proportional devigging overstate the longshot by ~1pp and understate the
+    favourite by ~1.8pp, which skewed entries hard toward cheap underdogs
+    (17 of the first 21 paper entries were priced under 20c).
+
+    The first 16 settled paper trades are consistent with that ~1pp error
+    being the dominant term in small edges: every entry whose computed edge
+    was under 1.4% lost (0W-12L), while both entries above 3.9% won. In
+    other words the sub-1pp "edges" were mostly devigging artefact, not
+    signal. Shin models the bias explicitly and collapses to near-
+    proportional on evenly-priced books, where there is no skew to correct.
+    Caveat: 16 trades is a small sample and the winners were only two
+    fixtures, so treat that split as directional, not established.
+    """
     raw = {}
     for o in outcomes:
         price = o.get('price', 0)
@@ -410,6 +467,11 @@ def get_devigged_probs(outcomes: List[Dict[str, Any]]) -> Dict[str, float]:
     total_margin = sum(raw.values())
     if total_margin <= 0:
         return {}
+
+    names = list(raw.keys())
+    shin = _shin_devig([raw[n] for n in names])
+    if shin is not None:
+        return dict(zip(names, shin))
     return {name: val / total_margin for name, val in raw.items()}
 
 def calculate_kelly_size(true_prob: float, fee_adjusted_cost: float, bankroll: float) -> int:
@@ -1299,7 +1361,18 @@ if __name__ == "__main__":
     logging.info("=" * 70)
 
     if not preflight():
-        logging.critical("Preflight failed. Not starting.")
+        # Settling already-open paper trades only needs the Kalshi market
+        # endpoint — no odds-api credits, no order placement. Exiting straight
+        # out on a failed preflight therefore threw away results the bot could
+        # still record: when the odds quota ran dry, three days of settled
+        # fixtures went unrecorded even though Kalshi had already finalised
+        # them. Do the settlement pass first, then stop.
+        logging.warning("Preflight failed — running settlement-only pass before exiting.")
+        try:
+            resolve_paper_trades()
+        except Exception as e:
+            logging.error(f"Settlement-only pass failed: {e}")
+        logging.critical("Preflight failed. Not entering trading loop.")
         sys.exit(1)
 
     logging.info("Preflight passed. Entering main loop (Ctrl-C to stop).")
