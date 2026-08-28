@@ -10,16 +10,6 @@
             "contracts": 35,
             "opened_ts": 1786778342.9590006
         },
-        "KXLALIGAGAME-26AUG27BARATH-ATH": {
-            "team": "Athletic Bilbao",
-            "opponent": "Barcelona",
-            "league": "soccer_spain_la_liga",
-            "price_cents": 12,
-            "net_cost": 0.127392,
-            "true_prob": 0.13279714701327952,
-            "contracts": 6,
-            "opened_ts": 1786930032.434904
-        },
         "KXBUNDESLIGAGAME-26AUG29SVELEV-SVE": {
             "team": "Elversberg",
             "opponent": "Bayer Leverkusen",
@@ -275,9 +265,23 @@
             "won": false,
             "pnl": -0.8133060000000001,
             "closed_ts": 1787652739.8367622
+        },
+        {
+            "team": "Athletic Bilbao",
+            "opponent": "Barcelona",
+            "league": "soccer_spain_la_liga",
+            "price_cents": 12,
+            "net_cost": 0.127392,
+            "true_prob": 0.13279714701327952,
+            "contracts": 6,
+            "opened_ts": 1786930032.434904,
+            "result": "no",
+            "won": false,
+            "pnl": -0.764352,
+            "closed_ts": 1787890334.9514987
         }
     ],
     "wins": 4,
-    "losses": 12,
-    "total_pnl": 29.260860999999995
+    "losses": 13,
+    "total_pnl": 28.496508999999996
 }
