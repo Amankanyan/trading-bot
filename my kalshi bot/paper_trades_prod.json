@@ -1,15 +1,5 @@
 {
     "open": {
-        "KXBUNDESLIGAGAME-26AUG28BMUVFB-VFB": {
-            "team": "VfB Stuttgart",
-            "opponent": "Bayern Munich",
-            "league": "soccer_germany_bundesliga",
-            "price_cents": 9,
-            "net_cost": 0.095733,
-            "true_prob": 0.12030460592146057,
-            "contracts": 35,
-            "opened_ts": 1786778342.9590006
-        },
         "KXBUNDESLIGAGAME-26AUG29SVELEV-SVE": {
             "team": "Elversberg",
             "opponent": "Bayer Leverkusen",
@@ -29,16 +19,6 @@
             "true_prob": 0.11564723719303682,
             "contracts": 12,
             "opened_ts": 1786972641.4650946
-        },
-        "KXBUNDESLIGAGAME-26AUG28BMUVFB-TIE": {
-            "team": "Draw",
-            "opponent": "Bayern Munich vs VfB Stuttgart",
-            "league": "soccer_germany_bundesliga",
-            "price_cents": 14,
-            "net_cost": 0.148428,
-            "true_prob": 0.15545980683913607,
-            "contracts": 6,
-            "opened_ts": 1787067446.0369198
         }
     },
     "closed": [
@@ -279,9 +259,37 @@
             "won": false,
             "pnl": -0.764352,
             "closed_ts": 1787890334.9514987
+        },
+        {
+            "team": "VfB Stuttgart",
+            "opponent": "Bayern Munich",
+            "league": "soccer_germany_bundesliga",
+            "price_cents": 9,
+            "net_cost": 0.095733,
+            "true_prob": 0.12030460592146057,
+            "contracts": 35,
+            "opened_ts": 1786778342.9590006,
+            "result": "no",
+            "won": false,
+            "pnl": -3.350655,
+            "closed_ts": 1788010179.8440895
+        },
+        {
+            "team": "Draw",
+            "opponent": "Bayern Munich vs VfB Stuttgart",
+            "league": "soccer_germany_bundesliga",
+            "price_cents": 14,
+            "net_cost": 0.148428,
+            "true_prob": 0.15545980683913607,
+            "contracts": 6,
+            "opened_ts": 1787067446.0369198,
+            "result": "no",
+            "won": false,
+            "pnl": -0.890568,
+            "closed_ts": 1788010180.0079298
         }
     ],
     "wins": 4,
-    "losses": 13,
-    "total_pnl": 28.496508999999996
+    "losses": 15,
+    "total_pnl": 24.255285999999998
 }
