@@ -1,26 +1,5 @@
 {
-    "open": {
-        "KXBUNDESLIGAGAME-26AUG29SVELEV-SVE": {
-            "team": "Elversberg",
-            "opponent": "Bayer Leverkusen",
-            "league": "soccer_germany_bundesliga",
-            "price_cents": 17,
-            "net_cost": 0.179877,
-            "true_prob": 0.1983106906991026,
-            "contracts": 15,
-            "opened_ts": 1786930035.7666857
-        },
-        "KXBUNDESLIGAGAME-26AUG29BVBHSV-HSV": {
-            "team": "Hamburger SV",
-            "opponent": "Borussia Dortmund",
-            "league": "soccer_germany_bundesliga",
-            "price_cents": 10,
-            "net_cost": 0.1063,
-            "true_prob": 0.11564723719303682,
-            "contracts": 12,
-            "opened_ts": 1786972641.4650946
-        }
-    },
+    "open": {},
     "closed": [
         {
             "team": "Rio Ave FC",
@@ -287,9 +266,37 @@
             "won": false,
             "pnl": -0.890568,
             "closed_ts": 1788010180.0079298
+        },
+        {
+            "team": "Elversberg",
+            "opponent": "Bayer Leverkusen",
+            "league": "soccer_germany_bundesliga",
+            "price_cents": 17,
+            "net_cost": 0.179877,
+            "true_prob": 0.1983106906991026,
+            "contracts": 15,
+            "opened_ts": 1786930035.7666857,
+            "result": "yes",
+            "won": true,
+            "pnl": 12.301844999999998,
+            "closed_ts": 1788096407.4427724
+        },
+        {
+            "team": "Hamburger SV",
+            "opponent": "Borussia Dortmund",
+            "league": "soccer_germany_bundesliga",
+            "price_cents": 10,
+            "net_cost": 0.1063,
+            "true_prob": 0.11564723719303682,
+            "contracts": 12,
+            "opened_ts": 1786972641.4650946,
+            "result": "no",
+            "won": false,
+            "pnl": -1.2756,
+            "closed_ts": 1788096407.5628147
         }
     ],
-    "wins": 4,
-    "losses": 15,
-    "total_pnl": 24.255285999999998
+    "wins": 5,
+    "losses": 16,
+    "total_pnl": 35.281531
 }
