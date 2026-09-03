@@ -1,5 +1,16 @@
 {
-    "open": {},
+    "open": {
+        "KXBUNDESLIGAGAME-26SEP13SVEBMU-SVE": {
+            "team": "Elversberg",
+            "opponent": "Bayern Munich",
+            "league": "soccer_germany_bundesliga",
+            "price_cents": 7,
+            "net_cost": 0.07455700000000001,
+            "true_prob": 0.09610131292304187,
+            "contracts": 39,
+            "opened_ts": 1788438199.3530948
+        }
+    },
     "closed": [
         {
             "team": "Rio Ave FC",
