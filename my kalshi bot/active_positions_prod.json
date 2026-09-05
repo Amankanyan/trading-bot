@@ -1,10 +1,10 @@
 {
-    "KXSAUDIPLGAME-26SEP04SHAHIL-HIL": {
+    "KXBUNDESLIGAGAME-26SEP05SCHBMU-BMU": {
         "buy_price": null,
-        "cost_basis": 424.8108,
-        "count": 646,
-        "team": "Al Hilal",
-        "league": null,
+        "cost_basis": 640.866,
+        "count": 753,
+        "team": "Bayern Munich",
+        "league": "soccer_germany_bundesliga",
         "entry_true_prob": null,
         "pending_order_id": null,
         "pending_side": null
