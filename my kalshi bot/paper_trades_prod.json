@@ -1,16 +1,5 @@
 {
-    "open": {
-        "KXBUNDESLIGAGAME-26SEP13SVEBMU-SVE": {
-            "team": "Elversberg",
-            "opponent": "Bayern Munich",
-            "league": "soccer_germany_bundesliga",
-            "price_cents": 7,
-            "net_cost": 0.07455700000000001,
-            "true_prob": 0.09610131292304187,
-            "contracts": 39,
-            "opened_ts": 1788438199.3530948
-        }
-    },
+    "open": {},
     "closed": [
         {
             "team": "Rio Ave FC",
@@ -305,9 +294,23 @@
             "won": false,
             "pnl": -1.2756,
             "closed_ts": 1788096407.5628147
+        },
+        {
+            "team": "Elversberg",
+            "opponent": "Bayern Munich",
+            "league": "soccer_germany_bundesliga",
+            "price_cents": 7,
+            "net_cost": 0.07455700000000001,
+            "true_prob": 0.09610131292304187,
+            "contracts": 39,
+            "opened_ts": 1788438199.3530948,
+            "result": "no",
+            "won": false,
+            "pnl": -2.9077230000000003,
+            "closed_ts": 1789396481.23328
         }
     ],
     "wins": 5,
-    "losses": 16,
-    "total_pnl": 35.281531
+    "losses": 17,
+    "total_pnl": 32.373808000000004
 }
