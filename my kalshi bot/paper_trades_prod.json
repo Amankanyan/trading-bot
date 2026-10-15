@@ -1,5 +1,16 @@
 {
-    "open": {},
+    "open": {
+        "KXUCLGAME-26OCT21AVLVIK-TIE": {
+            "team": "Draw",
+            "opponent": "Aston Villa vs Viking FK",
+            "league": "soccer_uefa_champs_league",
+            "price_cents": 17,
+            "net_cost": 0.179877,
+            "true_prob": 0.2000536702839133,
+            "contracts": 17,
+            "opened_ts": 1792069162.8156514
+        }
+    },
     "closed": [
         {
             "team": "Rio Ave FC",
