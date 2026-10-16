@@ -9,6 +9,16 @@
             "true_prob": 0.2000536702839133,
             "contracts": 17,
             "opened_ts": 1792069162.8156514
+        },
+        "KXUELGAME-26OCT22CELRCC-CEL": {
+            "team": "Celta Vigo",
+            "opponent": "Celtic",
+            "league": "soccer_uefa_europa_league",
+            "price_cents": 34,
+            "net_cost": 0.355708,
+            "true_prob": 0.40948318342370715,
+            "contracts": 28,
+            "opened_ts": 1792155157.55603
         }
     },
     "closed": [
