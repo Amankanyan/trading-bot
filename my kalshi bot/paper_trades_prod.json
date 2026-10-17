@@ -19,6 +19,16 @@
             "true_prob": 0.40948318342370715,
             "contracts": 28,
             "opened_ts": 1792155157.55603
+        },
+        "KXUCLGAME-26OCT20ROMSLO-TIE": {
+            "team": "Draw",
+            "opponent": "AS Roma vs \u0160K Slovan Bratislava",
+            "league": "soccer_uefa_champs_league",
+            "price_cents": 13,
+            "net_cost": 0.137917,
+            "true_prob": 0.1602400680176418,
+            "contracts": 23,
+            "opened_ts": 1792238000.1909552
         }
     },
     "closed": [
