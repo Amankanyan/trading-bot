@@ -1,10 +1,10 @@
 {
-    "KXMVECROSSCATEGORY-S2026B54TKYR274O4E3DY-T5EZSGBIQ": {
+    "KXUCLGAME-26OCT21RMARBL-RMA": {
         "buy_price": null,
-        "cost_basis": 40.936,
-        "count": 1462,
-        "team": "no Tie,yes Liverpool,yes Manchester City,no Tie,yes Roma,yes Dortmund,no Tie,no Tie,no Tie,no Tie,yes Inter,no Tie,no Tie,yes Real Madrid,yes Sporting CP",
-        "league": null,
+        "cost_basis": 1014.784,
+        "count": 1268,
+        "team": "Real Madrid",
+        "league": "soccer_uefa_champs_league",
         "entry_true_prob": null,
         "pending_order_id": null,
         "pending_side": null

@@ -19,16 +19,6 @@
             "true_prob": 0.40948318342370715,
             "contracts": 28,
             "opened_ts": 1792155157.55603
-        },
-        "KXUCLGAME-26OCT20ROMSLO-TIE": {
-            "team": "Draw",
-            "opponent": "AS Roma vs \u0160K Slovan Bratislava",
-            "league": "soccer_uefa_champs_league",
-            "price_cents": 13,
-            "net_cost": 0.137917,
-            "true_prob": 0.1602400680176418,
-            "contracts": 23,
-            "opened_ts": 1792238000.1909552
         }
     },
     "closed": [
@@ -339,9 +329,23 @@
             "won": false,
             "pnl": -2.9077230000000003,
             "closed_ts": 1789396481.23328
+        },
+        {
+            "team": "Draw",
+            "opponent": "AS Roma vs \u0160K Slovan Bratislava",
+            "league": "soccer_uefa_champs_league",
+            "price_cents": 13,
+            "net_cost": 0.137917,
+            "true_prob": 0.1602400680176418,
+            "contracts": 23,
+            "opened_ts": 1792238000.1909552,
+            "result": "no",
+            "won": false,
+            "pnl": -3.1720910000000004,
+            "closed_ts": 1792588798.4668996
         }
     ],
     "wins": 5,
-    "losses": 17,
-    "total_pnl": 32.373808000000004
+    "losses": 18,
+    "total_pnl": 29.201717000000002
 }
