@@ -1,15 +1,5 @@
 {
     "open": {
-        "KXUCLGAME-26OCT21AVLVIK-TIE": {
-            "team": "Draw",
-            "opponent": "Aston Villa vs Viking FK",
-            "league": "soccer_uefa_champs_league",
-            "price_cents": 17,
-            "net_cost": 0.179877,
-            "true_prob": 0.2000536702839133,
-            "contracts": 17,
-            "opened_ts": 1792069162.8156514
-        },
         "KXUELGAME-26OCT22CELRCC-CEL": {
             "team": "Celta Vigo",
             "opponent": "Celtic",
@@ -343,9 +333,23 @@
             "won": false,
             "pnl": -3.1720910000000004,
             "closed_ts": 1792588798.4668996
+        },
+        {
+            "team": "Draw",
+            "opponent": "Aston Villa vs Viking FK",
+            "league": "soccer_uefa_champs_league",
+            "price_cents": 17,
+            "net_cost": 0.179877,
+            "true_prob": 0.2000536702839133,
+            "contracts": 17,
+            "opened_ts": 1792069162.8156514,
+            "result": "no",
+            "won": false,
+            "pnl": -3.057909,
+            "closed_ts": 1792675214.9769113
         }
     ],
     "wins": 5,
-    "losses": 18,
-    "total_pnl": 29.201717000000002
+    "losses": 19,
+    "total_pnl": 26.143808000000003
 }
