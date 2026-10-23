@@ -1,16 +1,5 @@
 {
-    "open": {
-        "KXUELGAME-26OCT22CELRCC-CEL": {
-            "team": "Celta Vigo",
-            "opponent": "Celtic",
-            "league": "soccer_uefa_europa_league",
-            "price_cents": 34,
-            "net_cost": 0.355708,
-            "true_prob": 0.40948318342370715,
-            "contracts": 28,
-            "opened_ts": 1792155157.55603
-        }
-    },
+    "open": {},
     "closed": [
         {
             "team": "Rio Ave FC",
@@ -347,9 +336,23 @@
             "won": false,
             "pnl": -3.057909,
             "closed_ts": 1792675214.9769113
+        },
+        {
+            "team": "Celta Vigo",
+            "opponent": "Celtic",
+            "league": "soccer_uefa_europa_league",
+            "price_cents": 34,
+            "net_cost": 0.355708,
+            "true_prob": 0.40948318342370715,
+            "contracts": 28,
+            "opened_ts": 1792155157.55603,
+            "result": "no",
+            "won": false,
+            "pnl": -9.959824000000001,
+            "closed_ts": 1792710723.2856596
         }
     ],
     "wins": 5,
-    "losses": 19,
-    "total_pnl": 26.143808000000003
+    "losses": 20,
+    "total_pnl": 16.183984000000002
 }
