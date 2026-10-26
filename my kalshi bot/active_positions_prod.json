@@ -1,10 +1,10 @@
 {
-    "KXLALIGABTTS-26OCT25BARRMA-BTTS": {
+    "KXLIGUE1GAME-26OCT25PSGOL-PSG": {
         "buy_price": null,
-        "cost_basis": 174.1272,
-        "count": 223,
-        "team": "Both Teams To Score",
-        "league": null,
+        "cost_basis": 219.0949,
+        "count": 300,
+        "team": "PSG",
+        "league": "soccer_france_ligue_one",
         "entry_true_prob": null,
         "pending_order_id": null,
         "pending_side": null
