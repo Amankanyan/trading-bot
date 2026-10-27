@@ -1,10 +1,10 @@
 {
-    "KXLIGUE1GAME-26OCT25PSGOL-PSG": {
+    "KXAFCCLGAME-26OCT27SHMHIL-HIL": {
         "buy_price": null,
-        "cost_basis": 219.0949,
-        "count": 300,
-        "team": "PSG",
-        "league": "soccer_france_ligue_one",
+        "cost_basis": 361.9944,
+        "count": 502,
+        "team": "Al Hilal",
+        "league": null,
         "entry_true_prob": null,
         "pending_order_id": null,
         "pending_side": null
