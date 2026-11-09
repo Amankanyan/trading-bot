@@ -1,16 +1,5 @@
 {
-    "open": {
-        "KXSERIEAGAME-26NOV08GENACM-TIE": {
-            "team": "Draw",
-            "opponent": "AC Milan vs Inter Milan",
-            "league": "soccer_italy_serie_a",
-            "price_cents": 7,
-            "net_cost": 0.07455700000000001,
-            "true_prob": 0.25709992995371067,
-            "contracts": 134,
-            "opened_ts": 1793285317.4767926
-        }
-    },
+    "open": {},
     "closed": [
         {
             "team": "Rio Ave FC",
@@ -361,9 +350,23 @@
             "won": false,
             "pnl": -9.959824000000001,
             "closed_ts": 1792710723.2856596
+        },
+        {
+            "team": "Draw",
+            "opponent": "AC Milan vs Inter Milan",
+            "league": "soccer_italy_serie_a",
+            "price_cents": 7,
+            "net_cost": 0.07455700000000001,
+            "true_prob": 0.25709992995371067,
+            "contracts": 134,
+            "opened_ts": 1793285317.4767926,
+            "result": "no",
+            "won": false,
+            "pnl": -9.990638000000002,
+            "closed_ts": 1794247147.6763046
         }
     ],
     "wins": 5,
-    "losses": 20,
-    "total_pnl": 16.183984000000002
+    "losses": 21,
+    "total_pnl": 6.193346
 }
