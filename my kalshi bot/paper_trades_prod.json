@@ -1,5 +1,16 @@
 {
-    "open": {},
+    "open": {
+        "KXSCOTTISHPREMGAME-26NOV24HIBDUN-DUN": {
+            "team": "Dundee United",
+            "opponent": "Hibernian",
+            "league": "soccer_spl",
+            "price_cents": 21,
+            "net_cost": 0.221613,
+            "true_prob": 0.2594153215700628,
+            "contracts": 27,
+            "opened_ts": 1794883944.1221983
+        }
+    },
     "closed": [
         {
             "team": "Rio Ave FC",
