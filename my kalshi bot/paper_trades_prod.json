@@ -9,6 +9,16 @@
             "true_prob": 0.2594153215700628,
             "contracts": 27,
             "opened_ts": 1794883944.1221983
+        },
+        "KXMLSGAME-26NOV28HOUSJ-SJ": {
+            "team": "San Jose Earthquakes",
+            "opponent": "Houston Dynamo",
+            "league": "soccer_usa_mls",
+            "price_cents": 25,
+            "net_cost": 0.263125,
+            "true_prob": 0.4458648763474897,
+            "contracts": 38,
+            "opened_ts": 1795462878.9544423
         }
     },
     "closed": [
