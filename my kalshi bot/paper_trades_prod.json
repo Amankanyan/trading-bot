@@ -9,6 +9,16 @@
             "true_prob": 0.4458648763474897,
             "contracts": 38,
             "opened_ts": 1795462878.9544423
+        },
+        "KXUCLGAME-26DEC09ARSRMA-ARS": {
+            "team": "Arsenal",
+            "opponent": "Real Madrid",
+            "league": "soccer_uefa_champs_league",
+            "price_cents": 41,
+            "net_cost": 0.426933,
+            "true_prob": 0.4672942174106464,
+            "contracts": 20,
+            "opened_ts": 1795747586.7652655
         }
     },
     "closed": [
